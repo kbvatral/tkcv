@@ -11,14 +11,14 @@ class Window(Frame):
         self.impanel.pack()
 
         Window._active_windows[name] = self
-        self.master.protocol("WM_DELETE_WINDOW", self.window_close)
+        self.master.protocol("WM_DELETE_WINDOW", self.close)
 
     def set_img(self, image):
         img = cv2Tk(image)
         self.active = img
         self.impanel.configure(image=img)
 
-    def window_close(self):
+    def close(self):
         self.master.quit()
         self.master.withdraw()
 
