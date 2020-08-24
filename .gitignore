@@ -1,6 +1,15 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
-# Edit at https://www.toptal.com/developers/gitignore?templates=python,visualstudiocode
+# Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,opencv
+# Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,python,opencv
+
+### OpenCV ###
+#OpenCV for Mac and Linux
+#build and release folders
+*/CMakeFiles
+*/CMakeCache.txt
+*/Makefile
+*/cmake_install.cmake
+.DS_Store
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
@@ -150,4 +159,4 @@ dmypy.json
 # Ignore all local history of files
 .history
 
-# End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
+# End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,python,opencv
