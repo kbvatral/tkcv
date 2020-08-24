@@ -30,7 +30,7 @@ def destroyAllWindows():
         window.destroy()
     Window._active_windows.clear()
 
-def open_image(title="Open Image", include_video=False):
+def open_image(title="Open Image", parent=None, include_video=False):
     image_formats = get_image_filetypes(to_string=True)
     video_formats = get_video_filetypes(to_string=True)
 
@@ -40,12 +40,22 @@ def open_image(title="Open Image", include_video=False):
         formats.append(("Video Files", video_formats))
     formats.append(("All Files", "*.*"))
 
-    path = tk.filedialog.askopenfilename(title=title, filetypes=formats)
+    if parent is None:
+        root = tk.Tk()
+        root.withdraw()
+    elif isinstance(parent, str):
+        parent = Window._active_windows[parent]
+    path = tk.filedialog.askopenfilename(title=title, filetypes=formats, parent=parent)
     return try_open_img(path, try_video=include_video)
 
-def open_video(title="Open Video"):
+def open_video(title="Open Video", parent=None):
     video_formats = get_video_filetypes(to_string=True)
     formats = [("Video Files", video_formats), ("All Files", "*.*")]
     
-    path = tk.filedialog.askopenfilename(title=title, filetypes=formats)
+    if parent is None:
+        root = tk.Tk()
+        root.withdraw()
+    elif isinstance(parent, str):
+        parent = Window._active_windows[parent]
+    path = tk.filedialog.askopenfilename(title=title, filetypes=formats, parent=parent)
     return cv2.VideoCapture(path)
