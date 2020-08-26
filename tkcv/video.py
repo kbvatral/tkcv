@@ -28,8 +28,8 @@ def count_frames(video):
 
 
 class VideoPlayer(tk.Frame):
-    def __init__(self, stream, *args, override_fps=None, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, stream, override_fps=None, **kwargs):
+        super().__init__(**kwargs)
         self.vs = stream
         if override_fps is None:
             self.fps = max(1, self.vs.get(cv2.CAP_PROP_FPS))
@@ -54,7 +54,7 @@ class VideoPlayer(tk.Frame):
         self.btn_next.grid(row=1, column=3, padx=5)
 
         self.playing = False
-        self._nextFrame()
+        self.after(0, self._nextFrame)
 
     def get_frame(self):
         ret, frame = self.vs.read()
@@ -71,6 +71,9 @@ class VideoPlayer(tk.Frame):
             self.progress_bar['value'] = 100*self.frame_counter/self.frame_total
             frame = self.get_frame()
             self.main_window.set_img(frame)
+        else:
+            self.frame_counter = self.frame_total
+            self.playing = False
         if self.playing:
             self.after(self.frame_time, self._nextFrame)
 

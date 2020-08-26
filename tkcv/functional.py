@@ -40,11 +40,11 @@ def open_image(title="Open Image", parent=None, include_video=False, path_only=F
         formats.append(("Video Files", video_formats))
     formats.append(("All Files", "*.*"))
 
-    if parent is None:
-        root = tk.Tk()
-        root.withdraw()
-    elif isinstance(parent, str):
-        parent = Window._active_windows[parent]
+    if isinstance(parent, str):
+        if parent in Window._active_windows:
+            parent = Window._active_windows[parent]
+        else:
+            parent = None
     path = tk.filedialog.askopenfilename(title=title, filetypes=formats, parent=parent)
     if isinstance(path, str):
         if path_only:
@@ -57,11 +57,11 @@ def open_video(title="Open Video", parent=None, path_only=False):
     video_formats = get_video_filetypes(to_string=True)
     formats = [("Video Files", video_formats), ("All Files", "*.*")]
     
-    if parent is None:
-        root = tk.Tk()
-        root.withdraw()
-    elif isinstance(parent, str):
-        parent = Window._active_windows[parent]
+    if isinstance(parent, str):
+        if parent in Window._active_windows:
+            parent = Window._active_windows[parent]
+        else:
+            parent = None
     path = tk.filedialog.askopenfilename(title=title, filetypes=formats, parent=parent)
     if isinstance(path, str):
         if path_only:
