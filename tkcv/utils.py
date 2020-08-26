@@ -24,10 +24,9 @@ def get_video_filetypes(to_string=False):
         return video_filetypes
 
 def cv2Tk(image, swapRB=True):
-    if len(image.shape) == 3 and swapRB:
-        img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    else:
-        img = image
+    img = image.astype("uint8")
+    if len(img.shape) == 3 and swapRB:
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img_pil = ImageTk.PhotoImage(Image.fromarray(img))
     return img_pil
 
