@@ -47,8 +47,8 @@ class VideoPlayer(tk.Frame):
         self.ctrl_bar = tk.Frame()
         self.ctrl_bar.pack(pady=10)
         
-        self.btn_next = tk.Button(text="<<", master=self.ctrl_bar, command=lambda: self._seekFrame(self.frame_counter-1))
-        self.btn_next.grid(row=1, column=1, padx=5)
+        self.btn_prev = tk.Button(text="<<", master=self.ctrl_bar, command=lambda: self._seekFrame(self.frame_counter-1))
+        self.btn_prev.grid(row=1, column=1, padx=5)
         self.btn_play = tk.Button(text="Play/Pause", master=self.ctrl_bar, command=self._playPauseCallback)
         self.btn_play.grid(row=1, column=2, padx=5)
         self.btn_next = tk.Button(text=">>", master=self.ctrl_bar, command=lambda: self._nextFrame(no_after=True))
