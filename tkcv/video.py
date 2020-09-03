@@ -26,6 +26,19 @@ def count_frames(video):
         video.set(cv2.CAP_PROP_POS_FRAMES, 0)
     return total
 
+def get_framerate(video):
+    release = False
+    if not isinstance(video, cv2.VideoCapture):
+        video = cv2.VideoCapture(video)
+        release = True
+    fps = video.get(cv2.CAP_PROP_FPS)
+    if release:
+        video.release()
+    
+    if isinstance(fps, float) and fps > 0:
+        return fps
+    else:
+        return None
 
 class VideoPlayer(tk.Frame):
     def __init__(self, stream, override_fps=None, **kwargs):
